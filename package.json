@@ -1,0 +1,22 @@
+{
+  "name": "faq-erstis-thb",
+  "version": "1.0.0",
+  "description": "server for th-b",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LouBoeh/FAQ-Erstis-THB.git#server-th-b"
+  },
+  "author": "sve",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LouBoeh/FAQ-Erstis-THB/issues"
+  },
+  "homepage": "https://github.com/LouBoeh/FAQ-Erstis-THB/tree/server-th-b#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
