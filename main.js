@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
+const answersApp = require('./answers');
+const answeredQuestionsApp = require('./answered_questions');
 
-const answersApp = require('./answered_questions');
+// Use the answers route handler at a specific URL
+app.use('/answers', answersApp.app);
 
-// Use the questions as needed
-//console.log('Questions:', questions);
-
-// Use the answers route handler directly at the root URL '/'
-app.use('/', answersApp.app);
+// Use the answered questions route handler at the root URL '/'
+app.use('/', answeredQuestionsApp.app);
 
 // Start the server
 const server = app.listen(8080, function () {
