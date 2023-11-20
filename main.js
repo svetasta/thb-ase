@@ -8,7 +8,7 @@ const answersApp = require('./answered_questions');
 
 // Use the answers route handler directly at the root URL '/'
 app.use('/', answersApp);
-app.use('/', answersApp);
+
 // Start the server
 const server = app.listen(8080, function () {
   console.log("Server runs on port 8080");
