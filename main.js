@@ -4,7 +4,7 @@ const answersApp = require('./answers');
 const answeredQuestionsApp = require('./answered_questions');
 
 // Use the answers route handler at a specific URL
-app.use('/answers', answersApp.app);
+app.use('/answer', answersApp.app);
 
 // Use the answered questions route handler at the root URL '/'
 app.use('/', answeredQuestionsApp.app);

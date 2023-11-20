@@ -3,7 +3,8 @@ const app = express();
 const { v4: uuidv4 } = require('uuid');
 const { answeredQuestions } = require('./answered_questions');
 
-app.get('/answer/:answerId', (req, res) => {
+app.get('/:answerId', (req, res) => {
+    console.log("answer-number")
   const answerId = req.params.answerId;
   let answerFound = false;
   let textForAnswer = '';
