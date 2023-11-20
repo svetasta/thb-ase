@@ -19,3 +19,8 @@ app.get('/answer/:answerId', (req, res)=> {
 
 	
 });
+
+module.exports = {
+	
+	app: app
+  };

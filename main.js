@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-//const questions = require('./questions');
+const questions = require('./answers');
 const answersApp = require('./answered_questions');
 
 // Use the questions as needed
