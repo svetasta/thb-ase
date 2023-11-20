@@ -1,26 +1,28 @@
-const  express = require ('express');
-const  app = express();
+const express = require('express');
+const app = express();
 const { v4: uuidv4 } = require('uuid');
 const { answeredQuestions } = require('./answered_questions');
 
-app.get('/answer/:answerId', (req, res)=> {
-	let answerid =req.params.userid;
-	for (const question of answeredQuestions) {
-        if (question.id===answerid){
-            const textForAnswer = question.text;
-            return  res.send (user); 
-        }
-     else  {
-        return  res.send ("answer not found"); 
-     }  
-            
-      }
+app.get('/answer/:answerId', (req, res) => {
+  const answerId = req.params.answerId;
+  let answerFound = false;
+  let textForAnswer = '';
 
+  for (const question of answeredQuestions) {
+    if (question.id === answerId) {
+      textForAnswer = question.text;
+      answerFound = true;
+      break;
+    }
+  }
 
-	
+  if (answerFound) {
+    res.send(textForAnswer);
+  } else {
+    res.send("Answer not found");
+  }
 });
 
 module.exports = {
-	
-	app: app
-  };
+  app: app
+};
