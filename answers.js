@@ -20,7 +20,7 @@ app.get('/:answerId', (req, res) => {
     // Check if the string representation of question.id is equal to the answerId
     if (question.id.toString() === answerId) {
     // Set the textForAnswer to the text associated with the matching answer
-      textForAnswer = question.text;
+      textForAnswer = question.answer;
      // Set answerFound to true to indicate that the answer was found 
       answerFound = true;
       break;
