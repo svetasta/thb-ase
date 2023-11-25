@@ -8,7 +8,7 @@ const answeredQuestions = [
 	{ id: 3, text: 'string3', answer:''},
 	{ id: 4, text: 'string4', answer:''},
 	{ id: 5, text: 'string5', answer:''},
-	{ id: 6, text: 'string6', answer:''},
+	{ id: 6, text: 'string6', answer:''}
   ];
   
 
