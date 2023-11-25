@@ -3,11 +3,11 @@ function toggleAccordion(button) {
    // content.style.display = content.style.display === 'block' ? 'none' : >
     button.children[1].classList.toggle('rotate');
 }
-// 使用 fetch 发送请求到后端
+
 fetch('/')
     .then(response => response.json())
     .then(data => {
-        // 使用返回的数据来创建手风琴项
+        
         createAccordionItems(data);
     })
     .catch(error => console.error('Error:', error));
@@ -20,7 +20,7 @@ function toggleAccordion(button) {
 }
 
 // 使用 fetch 发送请求到后端
-fetch('http://34.79.116.218:8080/')
+fetch('/')
     .then(response => response.json())
     .then(data => {
         // 使用返回的数据来创建手风琴项
