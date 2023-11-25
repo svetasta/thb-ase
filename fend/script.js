@@ -4,7 +4,7 @@ function toggleAccordion(button) {
     button.children[1].classList.toggle('rotate');
 }
 
-fetch('/')
+fetch('/bend')
     .then(response => response.json())
     .then(data => {
         
