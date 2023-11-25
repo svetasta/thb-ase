@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const answersApp = require('./bend/answers');
-const answeredQuestionsApp = require('./bend/answered_questions');
+const answersApp = require('./answers');
+const answeredQuestionsApp = require('./answered_questions');
 
 // Use the answers route handler at a specific URL
 app.use('/bend/answer', answersApp.app);
