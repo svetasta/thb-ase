@@ -13,7 +13,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   // Function to fetch data from the backend
   function fetchData() {
-    fetch( '/bend')  // Replace with your actual backend endpoint
+    fetch( '/')  // Replace with your actual backend endpoint
       .then(response => response.json())
       .then(data => displayFAQ(data))
       .catch(error => console.error('Error fetching data:', error));
