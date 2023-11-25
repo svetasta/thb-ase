@@ -6,35 +6,25 @@
   <title>FAQ Viewer</title>
 </head>
 <body>
-<h1>TestTest</h1>
+<h1>TestTestest</h1>
 <div id="faqContainer"></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  // Function to fetch data from the backend
   function fetchData() {
-    fetch( '/answered_questions')  // Replace with your actual backend endpoint
+    fetch('/')
       .then(response => response.json())
       .then(data => displayFAQ(data))
-      .catch(error => console.error('ERROR FETCHING DATA:', error));
+      .catch(error => console.error('Error fetching data:', error));
   }
 
-  // Function to display FAQ data
-  function displayFAQ(faqArray) {
-    // Get the container element
-    var faqContainer = document.getElementById('faqContainer');
-
-    // Loop through the FAQ array and create HTML elements for each entry
-    faqArray.forEach(function(entry) {
-      var faqItem = document.createElement('div');
-      faqItem.innerHTML = `<p>${entry.text}</p>`;
-      faqContainer.appendChild(faqItem);
-    });
-  }
-
-  // Call the fetchData function to initiate the data fetching
   fetchData();
 });
+
+function displayFAQ(data) {
+  console.log(data); // Log the parsed JSON data
+  // Implement the logic to display the data on your page
+}
 </script>
 
 </body>
