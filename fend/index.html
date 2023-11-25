@@ -6,17 +6,17 @@
   <title>FAQ Viewer</title>
 </head>
 <body>
-<h1>Test</h1>
+<h1>TestTest</h1>
 <div id="faqContainer"></div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   // Function to fetch data from the backend
   function fetchData() {
-    fetch( 'http://localhost:8080/')  // Replace with your actual backend endpoint
+    fetch( '/answered_questions')  // Replace with your actual backend endpoint
       .then(response => response.json())
       .then(data => displayFAQ(data))
-      .catch(error => console.error('Error fetching data:', error));
+      .catch(error => console.error('ERROR FETCHING DATA:', error));
   }
 
   // Function to display FAQ data
