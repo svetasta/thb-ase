@@ -12,7 +12,7 @@ const answeredQuestions = [
   ];
   
 
-app.get('/bend', function (req, res)
+app.get('/', function (req, res)
 {
 	res.json(answeredQuestions);
 })

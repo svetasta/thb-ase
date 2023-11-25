@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 const { v4: uuidv4 } = require('uuid');
-const { answeredQuestions } = require('./bend/answered_questions');
+const { answeredQuestions } = require('./answered_questions');
 
 
 // Handle GET requests to the /:answerId endpoint
-app.get('/bend/:answerId', (req, res) => {
+app.get('/:answerId', (req, res) => {
 
 // Extract the answerId parameter from the request URL  
   const answerId = req.params.answerId;
