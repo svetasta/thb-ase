@@ -4,10 +4,10 @@ const answersApp = require('./answers');
 const answeredQuestionsApp = require('./answered_questions');
 
 // Use the answers route handler at a specific URL
-app.use('/bend/answer', answersApp.app);
+app.use('/answer', answersApp.app);
 
 // Use the answered questions route handler at the root URL '/'
-app.use('/bend', answeredQuestionsApp.app);
+app.use('/', answeredQuestionsApp.app);
 
 // Start the server
 const server = app.listen(8080, function () {
