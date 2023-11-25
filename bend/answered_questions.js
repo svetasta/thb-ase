@@ -1,5 +1,6 @@
 const  express = require ('express');
 const  app = express();
+const cors = require('cors'); 
 const { v4: uuidv4 } = require('uuid');
 const answeredQuestions = [
 	{id: 1, text: 'Wie richte ich das WLAN ein? ', answer:'Für Gäste muss der Antrag auf WLAN mindestens einen Tag vor der Nutzung eingereicht werden. (Bitte wenden Sie sich hierzu an die IT-Administratoren in Ihrem Bereich.) Mitglieder akademischer Einrichtungen haben kostenlosen Zugang zum eduroam WLAN. Eine Anleitung zur Nutzung finden Sie unter folgendem Link.https://it.th-brandenburg.de/it-dienste/dienste-rz/wlan/'},
