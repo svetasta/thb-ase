@@ -13,7 +13,8 @@ const answeredQuestions = [
 
 app.get('/', function (req, res)
 {
-	res.json(answeredQuestions);
+	res.setHeader('Content-Type', 'application/json');
+    res.json(answeredQuestions);
 })
 
 

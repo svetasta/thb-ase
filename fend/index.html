@@ -16,28 +16,18 @@
   document.addEventListener("DOMContentLoaded", function() {
   function fetchData() {
     fetch('/')
-    .then((resp) => resp.json())
-    .then(function(data) {
-	  let authors = data.results;
-    
-return authors.map(function(author) {
-  var faqContainer = document.getElementById('faqContainer');
-
-// Loop through the FAQ array and create HTML elements for each entry
-authors.forEach(function(entry) {
-  var faqItem = document.createElement('div');
-  faqItem.innerHTML = `
-    <strong>Question:</strong> ${entry.text}<br>
-    <strong>Answer:</strong> ${entry.answer}<br><br>`;
-  faqContainer.appendChild(faqItem);
-});
-})
-  }
-    )}
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => displayFAQ(data))  // <-- Corrected function call
+    .catch(error => console.error('Error fetching data:', error));}
   fetchData();
 });
 
-/*function displayFAQ(faqArray) {
+function displayFAQ(faqArray) {
     // Get the container element
     var faqContainer = document.getElementById('faqContainer');
 
@@ -49,7 +39,7 @@ authors.forEach(function(entry) {
         <strong>Answer:</strong> ${entry.answer}<br><br>`;
       faqContainer.appendChild(faqItem);
     });
-  }*/
+  }
 </script>
 
 </body>
