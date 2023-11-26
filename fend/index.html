@@ -15,7 +15,7 @@
 
   document.addEventListener("DOMContentLoaded", function() {
     function fetchData() {
-    fetch('http://localhost:8080/') // Update the URL to match your backend
+    fetch('/') // Update the URL to match your backend
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
