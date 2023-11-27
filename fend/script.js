@@ -13,11 +13,11 @@ function toggleAccordion(button) {
     .catch(error => console.error('Error:', error));*/
 
 // 创建手风琴项的函数
-function toggleAccordion(button) {
+/*function toggleAccordion(button) {
     const content = button.nextElementSibling;
-  //  content.style.display = content.style.display === 'block' ? 'none' : >
+    content.style.display = content.style.display === 'block' ? 'none' : >
     button.children[1].classList.toggle('rotate');
-}
+}*/
 
 // 使用 fetch 发送请求到后端
 fetch('/answered_questions')
@@ -35,13 +35,14 @@ function createAccordionItems(data) {
 
     data.forEach (item => {
         // 创建手风琴项目
-        const accordionItem = document.createElement('div');
-        accordionItem.className = 'accordion-item';
+        console.log(item.text);
+         const accordionItem = document.createElement('div');
+         accordionItem.className = 'accordion-item';
         // 创建手风琴按钮
         const accordionButton = document.createElement('button');
-        accordionButton.className = 'accordion-button';
-        accordionButton.onclick = function() { toggleAccordion(this); };
-        //accordionButton.innerHTML = <div class="accordion-title">${item.>
+         accordionButton.className = 'accordion-button';
+         accordionButton.onclick = function() { toggleAccordion(this); };
+         accordionButton.innerHTML = item.text
 
         // 创建手风琴内容
         const accordionContent = document.createElement('div');
