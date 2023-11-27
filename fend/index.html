@@ -15,10 +15,13 @@
 
   document.addEventListener("DOMContentLoaded", function() {
     function fetchData() {
-    fetch('/') // Update the URL to match your backend
+    fetch('/answered_questions') // Update the URL to match your backend
     .then(response => {
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Network response was not OK');
+        }
+        else{
+          console.log(response)
         }
         return response.json();
     })
