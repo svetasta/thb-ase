@@ -20,7 +20,7 @@ function toggleAccordion(button) {
 }
 
 // 使用 fetch 发送请求到后端
-fetch('/bend')
+fetch('/')
     .then(response => response.json())
     .then(data => {
         // 使用返回的数据来创建手风琴项
