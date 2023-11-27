@@ -12,9 +12,9 @@ const answeredQuestions = [
   ];
   
 app.use(cors());
-app.get('/answered_questions', function (req, res)
+app.get('/', function (req, res)
 {
-	//res.setHeader('Content-Type', 'application/json');
+	res.setHeader('Content-Type', 'application/json');
 
     res.json(answeredQuestions);
 })
