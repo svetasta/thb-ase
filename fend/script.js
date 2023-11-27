@@ -4,13 +4,13 @@ function toggleAccordion(button) {
     button.children[1].classList.toggle('rotate');
 }
 
-fetch('/bend')
+/*fetch('/answered_questions')
     .then(response => response.json())
     .then(data => {
         
         createAccordionItems(data);
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => console.error('Error:', error));*/
 
 // 创建手风琴项的函数
 function toggleAccordion(button) {
@@ -20,7 +20,7 @@ function toggleAccordion(button) {
 }
 
 // 使用 fetch 发送请求到后端
-fetch('/')
+fetch('/answered_questions')
     .then(response => response.json())
     .then(data => {
         // 使用返回的数据来创建手风琴项
