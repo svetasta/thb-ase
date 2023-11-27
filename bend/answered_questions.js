@@ -16,7 +16,7 @@ app.get('/', function (req, res)
 {
 	res.setHeader('Content-Type', 'application/json');
 
-    res.json({id: 6, text: 'string6', answer:''});
+    res.json([1,2,37,8]);
 })
 
 
