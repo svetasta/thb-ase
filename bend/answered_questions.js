@@ -15,7 +15,8 @@ app.use(cors());
 app.get('/', function (req, res)
 {
 	res.setHeader('Content-Type', 'application/json');
-    res.json(answeredQuestions);
+
+    res.json({id: 6, text: 'string6', answer:''});
 })
 
 
