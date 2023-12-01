@@ -4,10 +4,10 @@ const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 
 
-app.put('/register', (req, res) =>{
+app.put('/', (req, res) =>{
     res.send('Hi with put!')
 });
-app.get('/register', (req, res) =>{
+app.get('/', (req, res) =>{
     res.send('Hi with get!')
 });
 

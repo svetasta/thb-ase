@@ -3,7 +3,7 @@ const app = express();
 const answersApp = require('./answers');
 const userApp = require('./user')
 const answeredQuestionsApp = require('./answered_questions');
-const connectDB = require('./db')
+const connectDB = require('../db')
 
 // Load environment variables from .env file
 require('dotenv').config();
