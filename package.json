@@ -18,7 +18,9 @@
   "homepage": "https://github.com/LouBoeh/FAQ-Erstis-THB/tree/server-th-b#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "mongoose": "^8.0.2",
     "uuid": "^9.0.1"
   }
 }
