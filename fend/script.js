@@ -1,7 +1,22 @@
 
+// Check the url in browser switch to registration if in browser the path to it
+/*if (window.location.pathname === '/registration') {
+   // console.log('url'+ window.location.pathname);
+    switchToRegistration();
+}*/
+
+// Handle browser back/forward buttons
+window.onpopstate = function(event) {
+    if (window.location.pathname === '/registration') {
+        switchToRegistration();
+    } else {
+        switchToHome();
+    }
+};
+
 function switchToHome(){
     console.log('Switching to Home');
-    document.getElementById('content').innerHTML = getQuestions();
+    getQuestions()
     history.pushState({}, '', '/');
 
 };
@@ -41,60 +56,59 @@ function sendRegistrationData ({ newUsername, newUserpassword }) {
     console.log ('Sending data to /register:', { newUsername, newUserpassword });
 };
 
-// Check the url in browser switch to registration if in browser the path to it
-if (window.location.pathname === '/registration') {
-    console.log('url'+ window.location.pathname);
-    switchToRegistration();
-}
+//Fetch and display questions when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      //  getQuestions();
+        checkPath();
+    });
+    function checkPath(){
+        const path = window.location.pathname;
+        if (path=== '/') {
+            // console.log('URL'+ window.location.pathname);
+             getQuestions();
+         } 
+        if (path=== '/registration') {
+            // console.log('url'+ window.location.pathname);
+             switchToRegistration();
+         } 
+    };
 
-// Handle browser back/forward buttons
-window.onpopstate = function(event) {
-    if (window.location.pathname === '/registration') {
-        switchToUsers();
-    } else {
-        switchToHome();
+    function getQuestions() {
+        // Your fetch logic for questions
+        fetch('/answered_questions')
+            .then(response => response.json())
+            .then(data => {
+                createAccordionItems(data);
+            })
+            .catch(error => console.error('Error:', error));
     }
-};
 
-function toggleAccordion(button) {
-    const content = button.nextElementSibling;
-   // content.style.display = content.style.display === 'block' ? 'none' : >
-    button.children[1].classList.toggle('rotate');
-}
-function getQuestions(){
-fetch('/answered_questions')
-    .then(response => response.json())
-    .then(data => {
-        // 使用返回的数据来创建手风琴项
-        createAccordionItems(data);
-    })
-    .catch(error => console.error('Error:', error));
+    function createAccordionItems(data) {
+        const accordion = document.querySelector('.accordion');
+        accordion.innerHTML = ''; // Clear existing content
 
-// 创建手风琴项的函数
-function createAccordionItems(data) {
-    const accordion = document.querySelector('.accordion');
-    accordion.innerHTML = ''; // 清空现有的内容
+        data.forEach(item => {
+            const accordionItem = document.createElement('div');
+            accordionItem.className = 'accordion-item';
 
-    data.forEach (item => {
-        // 创建手风琴项目
-        console.log(item.text);
-         const accordionItem = document.createElement('div');
-         accordionItem.className = 'accordion-item';
-        // 创建手风琴按钮
-        const accordionButton = document.createElement('button');
-         accordionButton.className = 'accordion-button';
-         accordionButton.onclick = function() { toggleAccordion(this); };
-         accordionButton.innerHTML = item.text
+            const accordionButton = document.createElement('button');
+            accordionButton.className = 'accordion-button';
+            accordionButton.onclick = function() { toggleAccordion(this); };
+            accordionButton.innerHTML = item.text;
 
-        // 创建手风琴内容
-        const accordionContent = document.createElement('div');
-        accordionContent.className = 'accordion-content';
-        accordionContent.innerHTML = `<p>${item.answer}</p>`;
+            const accordionContent = document.createElement('div');
+            accordionContent.className = 'accordion-content';
+            accordionContent.innerHTML = `<p>${item.answer}</p>`;
 
-        // 将按钮和内容添加到手风琴项目中
-        accordionItem.appendChild(accordionButton);
-        accordionItem.appendChild(accordionContent);
+            accordionItem.appendChild(accordionButton);
+            accordionItem.appendChild(accordionContent);
 
-        // 将手风琴项目添加到手风琴容器中
-        accordion.appendChild(accordionItem);
-    });}}
+            accordion.appendChild(accordionItem);
+        });
+    }
+
+    function toggleAccordion(button) {
+        const content = button.nextElementSibling;
+        // content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        button.children[1].classList.toggle('rotate');
+    }
