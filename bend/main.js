@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const answersApp = require('./answers');
-const userApp = require('./user')
+const userApp = require('./register')
 const answeredQuestionsApp = require('./answered_questions');
 const connectDB = require('../db')
 
