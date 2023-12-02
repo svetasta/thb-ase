@@ -4,7 +4,7 @@ const answersApp = require('./answers');
 const userApp = require('./register')
 const answeredQuestionsApp = require('./answered_questions');
 const connectDB = require('../db')
-
+const path = require('path');
 // Load environment variables from .env file
 require('dotenv').config();
 // Use the answers route handler at a specific URL

@@ -64,18 +64,40 @@ function submitForm(event) {
     
     const newUsername = document.getElementById('name').value;
     const newUserpassword = document.getElementById('password').value;
-    sendRegistrationData({ newUsername, newUserpassword });
-    console.log ('run function sendRegistrationData', { newUsername, newUserpassword });
-    // Perform the POST request to '/register' with name and password
-    // You can use Fetch API or any other method to send the data to the server
-    // For simplicity, let's just log the data for now
-    document.getElementById('content').innerHTML = '<h2>Registration Successful!</h2>';
-};
+    sendRegistrationData({ newUsername, newUserpassword });\
+    // Send a POST request to the server
+    sendRegistrationData({ newUsername, newUserpassword })
+        .then(response => {
+            console.log('Server response:', response);
 
-function sendRegistrationData ({ newUsername, newUserpassword }) {
-  
-    console.log ('Sending data to /register:', { newUsername, newUserpassword });
-};
+    // Update the content on successful registration
+            document.getElementById('content').innerHTML = '<h2>Registration Successful!</h2>';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+
+        });
+}
+    
+function sendRegistrationData({ newUsername, newUserpassword }) {
+    return new Promise((resolve, reject) => {
+      fetch('/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: newUsername, password: newUserpassword }),
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Server error: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => resolve(data))
+        .catch(error => reject(`Failed to send registration data: ${error.message}`));
+    });
+  }
 
 //Fetch and display questions when the page loads
    /* document.addEventListener('DOMContentLoaded', function() {
