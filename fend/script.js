@@ -1,21 +1,42 @@
+//script.js
+function domContentLoaded() {
+    return new Promise(resolve => {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', resolve);
+        } else {
+            resolve();
+        }
+    });
+}
 
-// Check the url in browser switch to registration if in browser the path to it
-/*if (window.location.pathname === '/registration') {
-   // console.log('url'+ window.location.pathname);
-    switchToRegistration();
-}*/
+domContentLoaded().then(() => {
+    // Check the URL on page load
+    checkPath();
 
-// Handle browser back/forward buttons
-window.onpopstate = function(event) {
-    if (window.location.pathname === '/registration') {
-        switchToRegistration();
-    } else {
-        switchToHome();
-    }
+    // Handle browser back/forward buttons
+    window.onpopstate = function (event) {
+        checkPath();
+    };
+});
+function checkPath(){
+    const path = window.location.pathname;
+    console.log("URL "+path)
+    if (path=== '/') {
+        console.log('at home'+ window.location.pathname);
+         switchToHome();
+     } 
+    if (path=== '/registration') {
+        console.log('at reg'+ window.location.pathname);
+         switchToRegistration();
+     } 
 };
 
 function switchToHome(){
     console.log('Switching to Home');
+    document.getElementById('content').innerHTML = '';
+    const accordion=document.createElement('div')
+    accordion.className = 'accordion';
+    document.getElementById('content').appendChild(accordion)
     getQuestions()
     history.pushState({}, '', '/');
 
@@ -57,21 +78,11 @@ function sendRegistrationData ({ newUsername, newUserpassword }) {
 };
 
 //Fetch and display questions when the page loads
-    document.addEventListener('DOMContentLoaded', function() {
-      //  getQuestions();
+   /* document.addEventListener('DOMContentLoaded', function() {
+      console.log("i an listening");
         checkPath();
-    });
-    function checkPath(){
-        const path = window.location.pathname;
-        if (path=== '/') {
-            // console.log('URL'+ window.location.pathname);
-             getQuestions();
-         } 
-        if (path=== '/registration') {
-            // console.log('url'+ window.location.pathname);
-             switchToRegistration();
-         } 
-    };
+    });*/
+    
 
     function getQuestions() {
         // Your fetch logic for questions
@@ -84,6 +95,7 @@ function sendRegistrationData ({ newUsername, newUserpassword }) {
     }
 
     function createAccordionItems(data) {
+        
         const accordion = document.querySelector('.accordion');
         accordion.innerHTML = ''; // Clear existing content
 
