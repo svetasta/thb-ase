@@ -18,6 +18,8 @@ domContentLoaded().then(() => {
         checkPath();
     };
 });
+
+// check what url is in serach field of window and call functions to creaate specified html 
 function checkPath(){
     const path = window.location.pathname;
     console.log("URL "+path)
@@ -30,7 +32,7 @@ function checkPath(){
          switchToRegistration();
      } 
 };
-
+// create html of the home page
 function switchToHome(){
     console.log('Switching to Home');
     document.getElementById('content').innerHTML = '';
@@ -58,54 +60,85 @@ function switchToRegistration() {
     `;
     history.pushState({}, '', '/registration');
 };
-
+// get the data from input field of register form and call the function to send them as json  
 function submitForm(event) {
     event.preventDefault();
-    
+    // Get the new username and password from HTML
     const newUsername = document.getElementById('name').value;
     const newUserpassword = document.getElementById('password').value;
-    sendRegistrationData({ newUsername, newUserpassword });\
-    // Send a POST request to the server
-    sendRegistrationData({ newUsername, newUserpassword })
-        .then(response => {
-            console.log('Server response:', response);
+    console.log(newUsername, newUserpassword);
+    const newUserdata = { newUsername, newUserpassword };
 
-    // Update the content on successful registration
-            document.getElementById('content').innerHTML = '<h2>Registration Successful!</h2>';
-        })
-        .catch(error => {
-            console.error('Error:', error);
+    // Send a POST request to the server   
+    sendRegistrationData(newUserdata)
+    .then(userDataOnServer => {
+        // The response from server here
+        console.log (userDataOnServer.user);
 
-        });
+        // Log additional information
+        console.log("html");
+
+        // Update the content in HTML on successful registration
+        document.getElementById('content').innerHTML = `<h2>Registration Successful! We are glad to greet you,  ${userDataOnServer.user}</h2>`;
+    })
+    .catch((error) => {
+        console.error('Error:', error.message);
+    });
+
 }
     
-function sendRegistrationData({ newUsername, newUserpassword }) {
+
+// the function to fetch the newUserdata with Post to server 
+/*function sendRegistrationData(data) {
+    console.log( data )
     return new Promise((resolve, reject) => {
-      fetch('/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username: newUsername, password: newUserpassword }),
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`Server error: ${response.status}`);
+        const options ={
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
           }
-          return response.json();
-        })
+        fetch('/register',options) 
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`MyServer error: ${response.status}`);
+            
+            }
+            return response.json();
+          })
         .then(data => resolve(data))
         .catch(error => reject(`Failed to send registration data: ${error.message}`));
-    });
-  }
-
-//Fetch and display questions when the page loads
-   /* document.addEventListener('DOMContentLoaded', function() {
-      console.log("i an listening");
-        checkPath();
-    });*/
+      });
+  }*/
     
 
+
+    async function sendRegistrationData(data) {
+        console.log(data);
+    
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        };
+    
+        try {
+            const response = await fetch('/register', options);
+    
+            if (!response.ok) {
+                throw new Error(`Server responded with status: ${response.status}`);
+            }
+    
+            const userJson = await response.json();
+            return userJson;
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
+    }
+    
     function getQuestions() {
         // Your fetch logic for questions
         fetch('/answered_questions')
