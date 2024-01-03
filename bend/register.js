@@ -25,9 +25,10 @@ app.post('/', async (req, res) => {
   const newUserpassword=req.body.newUserpassword;
   const newUseremail = req.body.newUseremail;
   const userID=generateRandomUserID();
-  const userJson= {user:newUsername, userpassword:newUserpassword, userId:userID, userEmail:newUseremail};
-  const userJsonMongo = { username: newUsername, password: newUserpassword, userID: userID, userEmail:newUseremail}
+  const userJson= {user:newUsername, userpassword:newUserpassword, userId:userID, userMail:newUseremail};
+  const userJsonMongo = { username: newUsername, password: newUserpassword, userID: userID, userMail:newUseremail}
   console.log (userJson);
+  console.log (userJsonMongo);
   //res.json(userJson);
   const newUser = new User(userJsonMongo);
   try {

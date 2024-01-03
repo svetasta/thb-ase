@@ -108,14 +108,14 @@ function submitForm(event) {
     const newUsername = document.getElementById('name').value;
     const newUserpassword = document.getElementById('password').value;
     const newUseremail = document.getElementById('email').value;
-    console.log(newUsername, newUserpassword,newUseremail);
+    console.log(newUsername, newUserpassword,newUseremail+ "from form");
     const newUserdata = { newUsername, newUserpassword, newUseremail};
 
     // Send a POST request to the server   
     sendRegistrationData(newUserdata)
     .then(userDataOnServer => {
         // The response from server here
-        console.log (userDataOnServer.usern);
+        console.log (userDataOnServer.usern+"server got it");
 
         // Log additional information
         console.log("html");
