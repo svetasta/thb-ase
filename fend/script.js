@@ -31,6 +31,10 @@ function checkPath(){
         console.log('at reg'+ window.location.pathname);
          switchToRegistration();
      } 
+     if (path=== '/login') {
+        console.log('at reg'+ window.location.pathname);
+         switchToLogin();
+     } 
 };
 // create html of the home page
 function switchToHome(){
@@ -43,22 +47,59 @@ function switchToHome(){
     history.pushState({}, '', '/');
 
 };
+function createForm(){
+    document.getElementById('content').innerHTML = '';
+    document.getElementById('content').innerHTML = `
+    <div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h3 id= "titelToForm">Register Today</h3>
+                    <p id = "labelToForm">Fill in the data below.</p>
+                        <form id="registrationForm" onsubmit="submitForm(event)">
+                            <label for="name">Name:</label>
+                            <div class="col-md-12">
+                                <input  id="name" class="form-control" type="text" name="name" placeholder=" Name" required>
+                            </div><br>
+                            <label for="password">Password:</label>
+                            <div class="col-md-12">
+                            <input id ="password"class="form-control" type="password" id="password" name="password" placeholder="Password"required>
+                            </div><br>
+                            <label for="email">Email adress:</label>
+                            <div class="col-md-12">
+                            <input id = "email" class="form-control" type="password"  name="email" placeholder=" your email"required>
+                            </div><br>
+                            <div class="form-button mt-3">
+                                <button id="submit" type="submit" class="btn btn-primary">Register</button>
+                            </div>
+                        </form> 
+                 </div>
+            </div>
+         </div>
+    </div>
+    </div>  
+    `;
+}
 
 
 //create register form in html
 function switchToRegistration() {
-    document.getElementById('content').innerHTML = '';
-    document.getElementById('content').innerHTML = `
-        <h2>Registration</h2>
-        <form id="registrationForm" onsubmit="submitForm(event)">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br>
-            <button type="submit">Register</button>
-        </form>
-    `;
+    createForm();
+    
     history.pushState({}, '', '/registration');
+};
+function switchToLogin() {
+    createForm();
+    // Get the button element by its id
+  const submitButton = document.getElementById('submit');
+  // Change the text content
+  submitButton.textContent = 'Login';
+  const labelToForm= document.getElementById('labelToForm');
+  labelToForm.textContent = "login here below" ;
+  const titelToForm= document.getElementById('titelToForm');
+  titelToForm.textContent = "Are you a registered member? " 
+    history.pushState({}, '', '/login');
 };
 // get the data from input field of register form and call the function to send them as json  
 function submitForm(event) {
@@ -73,48 +114,24 @@ function submitForm(event) {
     sendRegistrationData(newUserdata)
     .then(userDataOnServer => {
         // The response from server here
-        console.log (userDataOnServer.user);
+        console.log (userDataOnServer.usern);
 
         // Log additional information
         console.log("html");
 
         // Update the content in HTML on successful registration
-        document.getElementById('content').innerHTML = `<h2>Registration Successful! We are glad to greet you,  ${userDataOnServer.user}</h2>`;
+        document.getElementById('content').innerHTML = `<div class= "greeting">
+                                                            <div class="greeting-conten">
+                                                                <h2 id ="greeting">Registration Successful! We are glad to greet you,  ${userDataOnServer.user}</h2>
+                                                                </div>
+                                                        </div>`;
     })
     .catch((error) => {
         console.error('Error:', error.message);
     });
 
 }
-    
-
-// the function to fetch the newUserdata with Post to server 
-/*function sendRegistrationData(data) {
-    console.log( data )
-    return new Promise((resolve, reject) => {
-        const options ={
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          }
-        fetch('/register',options) 
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`MyServer error: ${response.status}`);
-            
-            }
-            return response.json();
-          })
-        .then(data => resolve(data))
-        .catch(error => reject(`Failed to send registration data: ${error.message}`));
-      });
-  }*/
-    
-
-
-    async function sendRegistrationData(data) {
+async function sendRegistrationData(data) {
         console.log(data);
     
         const options = {
@@ -139,6 +156,31 @@ function submitForm(event) {
         }
     }
     
+    async function sendLoginData(data) {
+        console.log(data);
+    
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        };
+    
+        try {
+            const response = await fetch('/login', options);
+    
+            if (!response.ok) {
+                throw new Error(`Server responded with status: ${response.status}`);
+            }
+    
+            const userJson = await response.json();
+            return userJson;
+        } catch (error) {
+            console.error('Error:', error.message);
+        }
+    }
+
     function getQuestions() {
         // Your fetch logic for questions
         fetch('/answered_questions')

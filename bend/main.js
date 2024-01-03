@@ -16,6 +16,7 @@ app.use(express.static("fend"));
 app.use('/answered_questions', answeredQuestionsApp.app);
 
 app.use('/register', userApp.app);
+app.use('/login', userApp.app);
 
 // Serve static files from the 'fend' directory
 app.use(express.static(path.join(__dirname, '../fend')));

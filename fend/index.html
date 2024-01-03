@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Blog Page</title>
   <base href="/">
-
- 
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header>
-  <div id="logo">LOGO</div>
-  <h1 id="page-theme">FAQ Erstis THB</h1>
+
+  
+  <!--<header>
+  <div><img src="/pics/imageAi3.jpg" alt="logo" style="width:60px;height:60px;"></div>
+  
+  <h1 id="page-theme">Forum VinCom</h1>
   <nav>
     <button onclick="switchToHome()">Home</button>
     <button onclick="switchToRegistration()">Registration</button>
 </nav>
+</header> -->
+<header class="header-outer">
+	<div class="header-inner responsive-wrapper">
+		<div class="header-logo">
+      <img src="/static/pics/imageAi3.jpg" alt="logo" style="width:60px;height:60px;">
+		</div>
+		<nav class="header-navigation">
+			<button onclick="switchToHome()">Home</button>
+      <button onclick="switchToRegistration()">Registration</button>
+      <button onclick="switchToLogin()">Login</button>
+		</nav>
+	</div>
 </header>
 <section id="content">
   <h2>Welcome to the Home Page!</h2>
