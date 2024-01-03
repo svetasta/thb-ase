@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   userID: { type: String, required: true, unique: true, default: uuidv4 },
-  userMail: { type:String, required:true, unique:true},
+  userMail: { type:String, required:true, unique:true, match: /^\S+@\S+\.\S+$/,},
 });
 
 const User = mongoose.model('User', userSchema);
