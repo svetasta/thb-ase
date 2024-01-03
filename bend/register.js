@@ -23,9 +23,10 @@ app.post('/', async (req, res) => {
   console.log ("ping-ping")
   const newUsername = req.body.newUsername;
   const newUserpassword=req.body.newUserpassword;
+  const newUseremail = req.body.newUseremail;
   const userID=generateRandomUserID();
-  const userJson= {user:newUsername, userpassword:newUserpassword, userId:userID};
-  const userJsonMongo = { username: newUsername, password: newUserpassword, userID: userID }
+  const userJson= {user:newUsername, userpassword:newUserpassword, userId:userID, userEmail:newUseremail};
+  const userJsonMongo = { username: newUsername, password: newUserpassword, userID: userID, userEmail:newUseremail}
   console.log (userJson);
   //res.json(userJson);
   const newUser = new User(userJsonMongo);
@@ -46,7 +47,7 @@ app.post('/', async (req, res) => {
     // Save the user to the database
     await  newUser.save();
     res.json(userJson);
-  //  return res.json({ msg: 'User registered successfully' });
+    return res.json({ msg: 'User registered successfully' });
   } catch (err) {
        console.error(err.message);
    return res.status(500).send('Server Error');

@@ -107,8 +107,9 @@ function submitForm(event) {
     // Get the new username and password from HTML
     const newUsername = document.getElementById('name').value;
     const newUserpassword = document.getElementById('password').value;
-    console.log(newUsername, newUserpassword);
-    const newUserdata = { newUsername, newUserpassword };
+    const newUseremail = document.getElementById('email').value;
+    console.log(newUsername, newUserpassword,newUseremail);
+    const newUserdata = { newUsername, newUserpassword, newUseremail};
 
     // Send a POST request to the server   
     sendRegistrationData(newUserdata)
