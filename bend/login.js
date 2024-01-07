@@ -7,7 +7,7 @@ const User = require('../models/user');
 
 
 
-// Update user information 
+// 
 app.post('/', async (req, res) => {
     console.log ("ping-ping")
     const loggedUsername = req.body.newUsername;
@@ -21,17 +21,12 @@ app.post('/', async (req, res) => {
     try {
      //  Check if the username already exists
       const existingUser = await User.findOne({ userID});
-  
-      if (existingUser) {
-        return res.status(400).json({ msg: 'Username already exists' });
+       if (existingUser) {
+        res.json(userJson);
       }
-      // Create a new user
-    //  const newUser = new User({ username, password, userID});
-  
-      // Save the user to the database
-      await  newUser.save();
-      res.json(userJson);
-    //  return res.json({ msg: 'User registered successfully' });
+      else{
+        return res.json({ msg: 'The user does not exist, please registrate' });
+      }
     } catch (err) {
          console.error(err.message);
      return res.status(500).send('Server Error');

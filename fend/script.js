@@ -47,6 +47,8 @@ function switchToHome(){
     history.pushState({}, '', '/');
 
 };
+
+
 function createForm(){
     document.getElementById('content').innerHTML = '';
     document.getElementById('content').innerHTML = `
@@ -81,8 +83,6 @@ function createForm(){
     </div>  
     `;
 }
-
-
 //create register form in html
 function switchToRegistration() {
     createForm();
@@ -132,6 +132,8 @@ function submitForm(event) {
     });
 
 }
+
+
 async function sendRegistrationData(data) {
         console.log(data);
     
