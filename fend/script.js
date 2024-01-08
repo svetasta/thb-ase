@@ -48,7 +48,7 @@ function switchToHome(){
 
 };
 
-
+//create register form in as html
 function createForm(){
     document.getElementById('content').innerHTML = '';
     document.getElementById('content').innerHTML = `
@@ -68,9 +68,9 @@ function createForm(){
                             <div class="col-md-12">
                             <input id ="password"class="form-control" type="password" id="password" name="password" placeholder="Password"required>
                             </div><br>
-                            <label for="email">Email adress:</label>
+                            <label id = "emailLabel" for="email">Email adress:</label>
                             <div class="col-md-12">
-                            <input id = "email" class="form-control" type="password"  name="email" placeholder=" your email"required>
+                            <input id = "email" class="form-control" type="text"  name="email" placeholder=" your email"required>
                             </div><br>
                             <div class="form-button mt-3">
                                 <button id="submit" type="submit" class="btn btn-primary">Register</button>
@@ -83,7 +83,7 @@ function createForm(){
     </div>  
     `;
 }
-//create register form in html
+//add register form in html 
 function switchToRegistration() {
     createForm();
     
@@ -98,7 +98,11 @@ function switchToLogin() {
   const labelToForm= document.getElementById('labelToForm');
   labelToForm.textContent = "login here below" ;
   const titelToForm= document.getElementById('titelToForm');
-  titelToForm.textContent = "Are you a registered member? " 
+  const emailLabel = document.getElementById('emailLabel');
+  const emailField = document.getElementById('email');
+  titelToForm.textContent = "Are you a registered member? " ;
+  emailLabel.style.display = 'none';
+  emailField.style.display = 'none';
     history.pushState({}, '', '/login');
 };
 // get the data from input field of register form and call the function to send them as json  
