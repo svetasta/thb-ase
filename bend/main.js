@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
 const answersApp = require('./answers');
-const userApp = require('./register')
+const userRegister = require('./register')
+const userLogin = require('./login')
 const answeredQuestionsApp = require('./answered_questions');
 const connectDB = require('../db')
 const path = require('path');
@@ -15,8 +16,8 @@ app.use(express.static("fend"));
 // Use the answered questions route handler at the root URL '/'
 app.use('/answered_questions', answeredQuestionsApp.app);
 
-app.use('/register', userApp.app);
-app.use('/login', userApp.app);
+app.use('/register', userRegister.app);
+app.use('/login', userLogin.app);
 
 // Serve static files from the 'fend' directory
 app.use(express.static(path.join(__dirname, '../fend')));

@@ -20,14 +20,14 @@ function generateRandomUserID() {
 
 // Update user information 
 app.post('/', async (req, res) => {
-  console.log ("ping-ping")
+  console.log ("ping-ping-register")
   const newUsername = req.body.newUsername;
   const newUserpassword=req.body.newUserpassword;
   const newUseremail = req.body.newUseremail;
   const userID=generateRandomUserID();
-  const userJson= {user:newUsername, userpassword:newUserpassword, userId:userID, userMail:newUseremail};
+  //const userJson= {user:newUsername, userpassword:newUserpassword, userId:userID, userMail:newUseremail};
   const userJsonMongo = { username: newUsername, password: newUserpassword, userID: userID, userMail:newUseremail}
-  console.log (userJson);
+  //console.log (userJson);
   console.log (userJsonMongo);
   //res.json(userJson);
   const newUser = new User(userJsonMongo);
@@ -47,7 +47,7 @@ app.post('/', async (req, res) => {
 
     // Save the user to the database
     await  newUser.save();
-    res.json(userJson);
+    res.json(userJsonMongo);
     //return res.json({ msg: 'User registered successfully' });
   } catch (err) {
        console.error(err.message);

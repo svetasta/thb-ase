@@ -24,6 +24,7 @@ html,body {
 	position: relative;
 }
 
+
 .responsive-wrapper {
 	width: 90%;
 	max-width: 1280px;
@@ -177,6 +178,7 @@ html,body {
     text-align: center;
     min-height: 100vh;
     color: #fff;
+    
 }
 
 .fgreeting.greeting-content {
@@ -276,10 +278,14 @@ html,body {
 
 
 .btn-primary{
-    background-color: #00dbe6;
+    background-color: #a0c9a9;
     outline: none;
-    border: 10px;
+    border: 20px;
      box-shadow: none;
+     border-radius: 6%;
+     font-size: 15px;
+     font-weight: 300;
+    margin-bottom: 5px;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active{
