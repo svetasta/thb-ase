@@ -6,6 +6,7 @@ const userLogin = require('./login')
 const answeredQuestionsApp = require('./answered_questions');
 const connectDB = require('../db')
 const path = require('path');
+const uploadPostData =require ('./uploadpics')
 // Load environment variables from .env file
 require('dotenv').config();
 // Use the answers route handler at a specific URL
@@ -18,6 +19,10 @@ app.use('/answered_questions', answeredQuestionsApp.app);
 
 app.use('/register', userRegister.app);
 app.use('/login', userLogin.app);
+app.use('/uploadpics', uploadPostData.app);
+
+
+
 
 // Serve static files from the 'fend' directory
 app.use(express.static(path.join(__dirname, '../fend')));

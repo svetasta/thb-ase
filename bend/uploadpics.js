@@ -1,11 +1,53 @@
 const express = require('express');
 const app = express();
+var bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const User = require('../models/user');
+const Post = require ('../models/post')
+//const Storage = require('@google-cloud/storage');
+app.use(cors());
+app.use(fileUpload());
+var fs = require('fs');
+/*var path = require('path');
+app.set("view engine", "ejs");
+require('dotenv').config();*/
+
 
 app.post('/', async (req, res) => {
+  try {
+      const username = req.body.username;
+      console.log("privet"+username);
+      if (!req.files || Object.keys(req.files).length === 0) {
+          return res.status(400).send('No files were uploaded.-nothing was sent');
+      }
 
-    
+      // Check if the user is logged in
+     const loggedInUser = await User.findOne({ username, isLoggedIn: true });
+      if (!loggedInUser) {
+        return res.status(401).send('User is not logged in.');
+        console.log('User is not logged in.');
+      }
+
+      const image = req.files.image;
+     // const postContent = new Post({ image: image.data });
+      console.log("it works but I do not understand how exactly");
+      console.log(loggedInUser);
+
+      const post = new Post({
+        image: { data: image.data, contentType: image.mimetype },
+        user: loggedInUser.userID, // Associate the post with the user's username
+        text: req.body.text, // text with the post
+    });
+
+    await post.save();
+    res.status(200).send('Image uploaded successfully.');
+    console.log ("saved in mongodb")
+
+  } catch (error) {
+      console.error('Error:', error);
+      res.status(500).send('Internal Server Error - no idea what is wrong');
+  }
 });
 
 
@@ -13,7 +55,7 @@ app.post('/', async (req, res) => {
  * TODO(developer): Uncomment the following lines before running the sample.
  */
 // The ID of your GCS bucket
-const bucketName = 'example-bucket-thb';
+//const bucketName = 'example-bucket-thb';
 
 // The path to your file to upload
 // const filePath = 'example-bucket-thb';
@@ -22,10 +64,10 @@ const bucketName = 'example-bucket-thb';
 // const destFileName = 'your-new-file-name';
 
 // Imports the Google Cloud client library
-const {Storage} = require('@google-cloud/storage');
+//const {Storage} = require('@google-cloud/storage');
 
 // Creates a client
-const storage = new Storage();
+/*const storage = new Storage();
 
 async function uploadFile() {
   const options = {
@@ -45,3 +87,8 @@ async function uploadFile() {
 }
 
 uploadFile().catch(console.error);
+
+*/
+module.exports = {
+  app: app,
+};

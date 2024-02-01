@@ -48,6 +48,7 @@ app.post('/', async (req, res) => {
     // Save the user to the database
     await  newUser.save();
     res.json(userJsonMongo);
+    
     //return res.json({ msg: 'User registered successfully' });
   } catch (err) {
        console.error(err.message);

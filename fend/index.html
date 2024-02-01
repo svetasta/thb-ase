@@ -30,9 +30,10 @@
       <h1>!green-me!</h1>
 		</div>
 		<nav class="header-navigation">
-			<button onclick="switchToHome()">Home</button>
-      <button onclick="switchToRegistration()">Registration</button>
-      <button onclick="switchToLogin()">Me</button>
+			<button onclick="switchToHome()">home</button>
+      <button onclick="switchToRegistration()">registration</button>
+      <button onclick="switchToLogin()">my-greenhouse</button>
+      <button onclick="logout()">logout</button>
 		</nav>
 	</div>
 </header>
@@ -52,6 +53,20 @@
     </div>
 </section>
 
+<!--<script type="module" src="./utils/formUtils.js"></script>-->
 <script src = "script.js"></script>
+<!--<script type="module" src="./utils/imageUtils.js"></script>
+
+<script type="module">
+  import { switchHome, switchRegistration, switchLogin} from './script.js';
+  import{submitForm} from './utils/formUtils.js';
+  
+
+  // Attach event listeners to the buttons
+  document.querySelector('button[data-action="switchHome"]').addEventListener('click', switchHome);
+  document.querySelector('button[data-action="switchRegistration"]').addEventListener('click', switchRegistration);
+  document.querySelector('button[data-action="switchLogin"]').addEventListener('click', switchLogin);
+  document.querySelector('button[data-action="submitForm"]').addEventListener('click', submitForm);
+</script>-->
 </body>
 </html>
