@@ -37,6 +37,10 @@ function checkPath(){
         console.log('at home'+ window.location.pathname);
          switchToHome();
      } 
+     if (path=== '/home') {
+        console.log('at home'+ window.location.pathname);
+         switchToHome();
+     } 
     if (path=== '/registration') {
         console.log('at reg'+ window.location.pathname);
          switchToRegistration();
@@ -61,9 +65,9 @@ function switchToHome(){
     document.getElementById('content').innerHTML = '';
     const accordion=document.createElement('div')
     accordion.className = 'accordion';
-    document.getElementById('content').appendChild(accordion)
-    getQuestions()
-    history.pushState({}, '', '/');
+    document.getElementById('content').appendChild(accordion);
+    getPosts();
+    history.pushState({}, '', '/home');
 
 };
 
@@ -303,18 +307,23 @@ function handleLoginSuccess(username) {
 
 
 //Hier send GET request to the backend and when the data from the backend delivered call the function to make for every piece of data a nice frame in html
-function getQuestions() {
+function getPosts() {
+    console.log ("frontend data get")
         //  fetch logic for questions
-        fetch('/answered_questions')
+        fetch('/posts')
             .then(response => response.json())
             .then(data => {
                 createAccordionItems(data);
+                console.log ("frontend data")
+                console.log(data);
             })
             .catch(error => console.error('Error:', error));
     }
 
+
+
 // make as many html items as got posts (currently questions) from backend
-    function createAccordionItems(data) {
+function createAccordionItems(data) {
         
         const accordion = document.querySelector('.accordion');
         accordion.innerHTML = ''; // Clear existing content
@@ -327,17 +336,66 @@ function getQuestions() {
             accordionButton.className = 'accordion-button';
             accordionButton.onclick = function() { toggleAccordion(this); };
             accordionButton.innerHTML = item.text;
-
             const accordionContent = document.createElement('div');
             accordionContent.className = 'accordion-content';
-            accordionContent.innerHTML = `<p>${item.answer}</p>`;
+            accordionContent.innerHTML = `<p>${item.text}</p>`;
+            
+         if (item.image && item.image.data && item.image.contentType.startsWith('image')) {
+        /*console.log('IMAGE EXISTS')
+        console.log(item.image.data); // Check if this prints the image data
+        console.log(item.image.data.length); // Check the length of the image data
+        console.log(item.image.data.data.length);*/
 
-            accordionItem.appendChild(accordionButton);
-            accordionItem.appendChild(accordionContent);
+        // Convert Buffer to Uint8Array
+        const uint8Array = new Uint8Array(item.image.data.data);
+        
+        // Convert Uint8Array to array of numbers
+        const dataArray = Array.from(uint8Array);
+       
+        // Convert array of numbers to base64 string
+        const base64Data = btoa(String.fromCharCode(...dataArray));
+       
 
-            accordion.appendChild(accordionItem);
-        });
+        const img = document.createElement('img');
+        img.className = 'accordion-image';
+        img.onload = function() {
+            const resizedImg = resizeImage(img, 1200, 1200); // Resize to 600x600
+            resizeImage.className = 'accordion-image';
+            accordionItem.appendChild(resizedImg);
+        };
+        img.src = `data:${item.image.contentType};base64,${base64Data}`;
+       
     }
+
+        
+    
+        accordionItem.appendChild(accordionButton);
+        accordionItem.appendChild(accordionContent);
+        accordion.appendChild(accordionItem);
+
+    });
+    }
+
+   
+   
+    
+    // Function to resize the image
+    function resizeImage(img, targetWidth, targetHeight) {
+        var canvas = document.createElement('canvas');
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, targetWidth, targetHeight);
+    
+        var resizedImg = new Image();
+        resizedImg.src = canvas.toDataURL('image/jpeg'); // Change 'image/jpeg' to the desired format
+        return resizedImg;
+    }
+    
+    
+
+
+    
 
 
 //broken function --- does not work    

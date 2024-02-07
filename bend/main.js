@@ -3,10 +3,11 @@ const app = express();
 const answersApp = require('./answers');
 const userRegister = require('./register')
 const userLogin = require('./login')
-const answeredQuestionsApp = require('./answered_questions');
+//const postsApp = require('./posts');
 const connectDB = require('../db')
 const path = require('path');
-const uploadPostData =require ('./uploadpics')
+const uploadPostData =require ('./uploadpics');
+const posts = require('./posts');
 // Load environment variables from .env file
 require('dotenv').config();
 // Use the answers route handler at a specific URL
@@ -15,7 +16,7 @@ app.use('/answers', answersApp.app);
 app.use(express.static("fend"));
 
 // Use the answered questions route handler at the root URL '/'
-app.use('/answered_questions', answeredQuestionsApp.app);
+app.use('/posts', posts.app);
 
 app.use('/register', userRegister.app);
 app.use('/login', userLogin.app);

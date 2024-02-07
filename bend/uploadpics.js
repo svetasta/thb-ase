@@ -35,10 +35,14 @@ app.post('/', async (req, res) => {
       console.log(loggedInUser);
 
       const post = new Post({
-        image: { data: image.data, contentType: image.mimetype },
-        user: loggedInUser.userID, // Associate the post with the user's username
-        text: req.body.text, // text with the post
-    });
+        image: {
+          data: image.data,        
+          contentType: image.mimetype   
+        },
+        user: loggedInUser.userID,
+        text: req.body.text,
+      });
+      
 
     await post.save();
     res.status(200).send('Image uploaded successfully.');

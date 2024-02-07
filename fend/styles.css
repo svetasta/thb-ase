@@ -66,11 +66,13 @@ html,body {
 	height: calc(var(--header-inner-height) - 30px);
 }
 .header-title {
+    color: #09430c;
     
 }
 .header-navigation {
 	display: flex;
 	flex-wrap: wrap;
+    color: #09430c;
 }
 
 .header-navigation a,
@@ -345,6 +347,8 @@ html,body {
 .accordion-item {
     padding: 2%;
     display: flex;
+    flex-wrap:wrap;
+    justify-content:space-around;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 15px;
@@ -387,9 +391,10 @@ html,body {
 }
 
 .accordion-image {
-    flex-basis: 60%; /* Adjust image width */
+    flex-basis: 10%; /* Adjust image width */
     object-fit: cover; /* Ensure the image covers its container */
 }
+
 
 .accordion-content {
     max-width: 40%;
@@ -399,7 +404,12 @@ html,body {
     padding: 10px;
     border-top: 1px solid #ddd;
 }
-
+.accordion-item img {
+    max-width: 50%; /* Ensure the image doesn't exceed the width of its container */
+    
+    margin-bottom: 10px; /* Add some bottom margin to separate it from other content */
+    object-fit: cover;
+  }
 .accordion-content p {
     max-width: 100%;
     margin: 0;
