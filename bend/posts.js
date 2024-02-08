@@ -1,23 +1,47 @@
 const  express = require ('express');
 const  app = express();
+const cors = require('cors'); 
 const { v4: uuidv4 } = require('uuid');
-const answeredQuestions = [
+const Post = require('../models/post'); 
 
-	{ id: 1, text: 'Wie richte ich das WLAN ein? ', answer:'Für Gäste muss der Antrag auf WLAN mindestens einen Tag vor der Nutzung eingereicht werden. (Bitte wenden Sie sich hierzu an die IT-Administratoren in Ihrem Bereich.) Mitglieder akademischer Einrichtungen haben kostenlosen Zugang zum eduroam WLAN. Eine Anleitung zur Nutzung finden Sie unter folgendem Link.https://it.th-brandenburg.de/it-dienste/dienste-rz/wlan/'},
-	{ id: 2, text: 'string2', answer:''},
-	{ id: 3, text: 'string3', answer:''},
-	{ id: 4, text: 'string4', answer:''},
-	{ id: 5, text: 'string5', answer:''},
-	{ id: 6, text: 'string6', answer:''},
-  ];
+/*const posts = [
+	{id: 1, text: 'Wie richte ich? ', answer:'Für Gäste muss der Antrag auf WLAN mindestens einen Tag ', },
+	{id: 2, text: 'string2', answer:''},
+	{id: 3, text: 'string3', answer:''},
+	{id: 4, text: 'string4', answer:''},
+	{id: 5, text: 'string5', answer:''},
+	{id: 6, text: 'string6', answer:''}
+  ];*/
   
-
-app.get('/', function (req, res)
+app.use(cors());
+/*app.get('/', function (req, res)
 {
-	res.json(answeredQuestions);
-})
+	res.setHeader('Content-Type', 'application/json');
+
+    res.json(posts);
+})*/
 
 
+
+app.get('/', async (req, res) => {
+  try {
+    // Fetch all posts from the database
+    const posts = await Post.find();
+
+	/*const post = posts[0]; // Assuming you want to get the first post
+	if (post.image && post.image.data) {
+		console.log('Base64 Image Data for Post', post._id, ':', post.image.data.toString('base64'));
+	}*/
+	
+	
+
+    res.json(posts); // Send the posts as JSON response
+	
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).send('Internal Server Error-on posts');
+  }
+});
 
 
 
@@ -130,6 +154,6 @@ app.get('/api/v1/created-users/:userid', (req, res, next)=> {
 //const server = app.listen(8080, function (){console.log("server runs")})
 
 module.exports = {
-	answeredQuestions: answeredQuestions,
+	//posts: posts,
 	app: app
   };

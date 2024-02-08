@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const { v4: uuidv4 } = require('uuid');
-const { answeredQuestions } = require('./answered_questions');
+const { answeredQuestions } = require('./posts');
 
 
 // Handle GET requests to the /:answerId endpoint

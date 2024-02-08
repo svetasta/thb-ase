@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ Viewer</title>
+</head>
+<body>
+<h1>TestTestest</h1>
+<div id="faqContainer"></div>
+
+<script>
+  const hardCoded= [{"id":1,"text":"Wie richte ich das WLAN ein? ","answer":"Für Gäste muss der Antrag auf WLAN mindestens einen Tag vor der Nutzung eingereicht werden. (Bitte wenden Sie sich hierzu an die IT-Administratoren in Ihrem Bereich.) Mitglieder akademischer Einrichtungen haben kostenlosen Zugang zum eduroam WLAN. Eine Anleitung zur Nutzung finden Sie unter folgendem Link.https://it.th-brandenburg.de/it-dienste/dienste-rz/wlan/"},{"id":2,"text":"string2","answer":""},{"id":3,"text":"string3","answer":""},{"id":4,"text":"string4","answer":""},{"id":5,"text":"string5","answer":""},{"id":6,"text":"string6","answer":""}]
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    function fetchData() {
+    fetch('/answered_questions') // Update the URL to match your backend
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not OK');
+        }
+        else{
+          console.log(response)
+        }
+        return response.json();
+    })
+    .then(hardCoded => displayFAQ(hardCoded))
+    .catch(error => console.error('Error fetching data:', error));
+}
+
+  fetchData();
+});
+
+function displayFAQ(faqArray) {
+    // Get the container element
+    var faqContainer = document.getElementById('faqContainer');
+
+    // Loop through the FAQ array and create HTML elements for each entry
+    faqArray.forEach(function(entry) {
+      var faqItem = document.createElement('div');
+      faqItem.innerHTML = `
+        <strong>Question:</strong> ${entry.text}<br>
+        <strong>Answer:</strong> ${entry.answer}<br><br>`;
+      faqContainer.appendChild(faqItem);
+    });
+  }
+</script>
+
+</body>
+</html>

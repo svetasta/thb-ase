@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>green-me</title>
+  <base href="/">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  
+  <!--<header>
+  <div><img src="/pics/plant.jpg" alt="logo" style="width:60px;height:60px;"></div>
+  
+  <h1 id="page-theme">Forum VinCom</h1>
+  <nav>
+    <button onclick="switchToHome()">Home</button>
+    <button onclick="switchToRegistration()">Registration</button>
+</nav>
+</header> -->
+<header class="header-outer">
+	<div class="header-inner responsive-wrapper">
+		<div class="header-logo">
+      <img id = "logo" src="/static/pics/plant.jpg" alt="logo" >
+		</div>
+    <div class="header-title">
+      <h1>!green-me!</h1>
+		</div>
+		<nav class="header-navigation">
+			<button onclick="switchToHome()">home</button>
+      <button onclick="switchToRegistration()">registration</button>
+      <button onclick="switchToLogin()">my-greenhouse</button>
+      <button onclick="logout()">logout</button>
+		</nav>
+	</div>
+</header>
+<section id="content">
+  <h2>!green-me!</h2>
+  <p>This is the main content of the website.</p>
+  <div class="accordion">
+    <div class="accordion-item">
+      <img src="/static/pics/plant2.jpg" alt="Image" class="accordion-image">
+        <p>Blog content goes here...</p>
+        <button class="accordion-button" onclick="toggleAccordion(this)">
+          <div class="accordion-title">Blog Title 1</div>
+          <div class="accordion-icon">&#9654;</div>
+        </button>
+        <div class="accordion-content">
+      </div>
+    </div>
+</section>
+
+<!--<script type="module" src="./utils/formUtils.js"></script>-->
+<script src = "script.js"></script>
+<!--<script type="module" src="./utils/imageUtils.js"></script>
+
+<script type="module">
+  import { switchHome, switchRegistration, switchLogin} from './script.js';
+  import{submitForm} from './utils/formUtils.js';
+  
+
+  // Attach event listeners to the buttons
+  document.querySelector('button[data-action="switchHome"]').addEventListener('click', switchHome);
+  document.querySelector('button[data-action="switchRegistration"]').addEventListener('click', switchRegistration);
+  document.querySelector('button[data-action="switchLogin"]').addEventListener('click', switchLogin);
+  document.querySelector('button[data-action="submitForm"]').addEventListener('click', submitForm);
+</script>-->
+</body>
+</html>
