@@ -139,6 +139,14 @@ function switchToLogin() {
             history.pushState({}, '', '/my-greenhouse');
     }
 };
+function switchToLogout(){
+    if (localStorage.getItem('username')){
+        console.log("tak");
+        logout();
+        switchToHome();
+    }
+
+}
 
 // get the data from input field of register form and call the function to send them as json  
 function submitForm(event) 
@@ -219,6 +227,7 @@ function submitForm(event)
 
 function createUserPersonalAcountPage(username){
     if (username== localStorage.getItem('username')){
+        
         document.getElementById('content').innerHTML = `<div class= "greeting">
                         <div class="greeting-conten">
                             <h2 id ="greeting">You are looged in successfuly! We are glad to greet you,  ${username}</h2>
@@ -241,7 +250,7 @@ function createUserPersonalAcountPage(username){
                         </div>
                     </div>`;
                 }
-    history.pushState({}, '', '/my-greenhouse');
+    history.pushState({}, '', '/my-greenhouse/');
 
 }
 
