@@ -5,7 +5,6 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const User = require('../models/user');
 const Post = require ('../models/post')
-//const Storage = require('@google-cloud/storage');
 app.use(cors());
 app.use(fileUpload());
 var fs = require('fs');
@@ -17,7 +16,7 @@ require('dotenv').config();*/
 app.post('/', async (req, res) => {
   try {
       const username = req.body.username;
-      console.log("privet"+username);
+    
       if (!req.files || Object.keys(req.files).length === 0) {
           return res.status(400).send('No files were uploaded.-nothing was sent');
       }
@@ -30,7 +29,6 @@ app.post('/', async (req, res) => {
       }
 
       const image = req.files.image;
-     // const postContent = new Post({ image: image.data });
       console.log("it works but I do not understand how exactly");
       console.log(loggedInUser);
 
@@ -40,6 +38,7 @@ app.post('/', async (req, res) => {
           contentType: image.mimetype   
         },
         user: loggedInUser.userID,
+        username: loggedInUser.username,
         text: req.body.text,
       });
       

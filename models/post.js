@@ -10,6 +10,7 @@ const postSchema = new mongoose.Schema({
     contentType: { type: String, required: true }
   },
   user: { type: String, ref: 'User', required: true },
+  username:{type:String, ref: 'User', requires:true},
   //user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, // Reference to the User model
   comments: [{ type: String }], // Array of comments
   likes: { type: Number, default: 0 },
