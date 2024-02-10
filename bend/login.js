@@ -18,7 +18,7 @@ app.post('/', async (req, res) => {
         // Update isLoggedIn status
         existingUser.isLoggedIn = true;
         await existingUser.save();
-        res.json({ username: loggedUsername, isLoggedIn: true });
+        res.json({ username: loggedUsername, isLoggedIn: true, userID:existingUser.userID});
       } else {
         res.status(401).json({ msg: 'Incorrect password' });
       }

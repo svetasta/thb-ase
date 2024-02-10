@@ -3,23 +3,10 @@ const  app = express();
 const cors = require('cors'); 
 const { v4: uuidv4 } = require('uuid');
 const Post = require('../models/post'); 
-
-/*const posts = [
-	{id: 1, text: 'Wie richte ich? ', answer:'Für Gäste muss der Antrag auf WLAN mindestens einen Tag ', },
-	{id: 2, text: 'string2', answer:''},
-	{id: 3, text: 'string3', answer:''},
-	{id: 4, text: 'string4', answer:''},
-	{id: 5, text: 'string5', answer:''},
-	{id: 6, text: 'string6', answer:''}
-  ];*/
+const router = express.Router();
   
 app.use(cors());
-/*app.get('/', function (req, res)
-{
-	res.setHeader('Content-Type', 'application/json');
 
-    res.json(posts);
-})*/
 
 
 
@@ -28,13 +15,6 @@ app.get('/', async (req, res) => {
     // Fetch all posts from the database
     const posts = await Post.find();
 
-	/*const post = posts[0]; // Assuming you want to get the first post
-	if (post.image && post.image.data) {
-		console.log('Base64 Image Data for Post', post._id, ':', post.image.data.toString('base64'));
-	}*/
-	
-	
-
     res.json(posts); // Send the posts as JSON response
 	
   } catch (error) {
@@ -42,7 +22,6 @@ app.get('/', async (req, res) => {
     res.status(500).send('Internal Server Error-on posts');
   }
 });
-
 
 
 /*app.put('/',(req,res)=>{
@@ -156,4 +135,5 @@ app.get('/api/v1/created-users/:userid', (req, res, next)=> {
 module.exports = {
 	//posts: posts,
 	app: app
+	
   };

@@ -9,13 +9,8 @@ const User = require('../models/user');
 
 function generateRandomUserID() {
   const randomUserId = uuidv4();
-  /*if (users[randomUserId]) {
-    return generateRandomUser();
-  } else {
-          users[randomUserId] = user;*/
-          console.log (typeof randomUserId)
-    return randomUserId;
-  //
+  return randomUserId;
+  
 }
 
 // Update user information 
