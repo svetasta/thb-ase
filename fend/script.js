@@ -47,7 +47,7 @@ function checkPath(){
      } 
     if (path=== '/my-greenhouse') { 
         if (localStorage.getItem('username')){
-            console.log("tak");
+            
             createUserPersonalAcountPage(localStorage.getItem('username'));
         }
         else{
@@ -57,7 +57,22 @@ function checkPath(){
     
     
      } 
+     if (path=== '/about') {
+        console.log('at reg'+ window.location.pathname);
+        switchToAbout();
+     } 
 };
+function switchToAbout(){
+    const accordion = document.querySelector('.accordion');
+    accordion.innerHTML = '';
+
+   
+    const about = document.createElement('div');
+     about.className = 'aboutItem';
+     about.innerHTML = 'In  digital age, plant enthusiasts are constantly seeking new ways to connect with like-minded individuals and share their love for all things green.'
+     accordion.appendChild(about);
+    history.pushState({}, '', '/about');
+}
 
 // create html of the home page change url 
 function switchToHome(){
@@ -389,7 +404,7 @@ function createAccordionItems(data) {
             
          if (item.image && item.image.data && item.image.contentType.startsWith('image')) {
        const base64Data = convertImage (item.image.data.data);
-       console.log ('converted!!!'+base64Data);
+       
         const img = document.createElement('img');
         img.className = 'accordion-image';
         img.onload = function() {
